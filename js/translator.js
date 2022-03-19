@@ -65,7 +65,7 @@ function loadDict() {
         type: "GET",
         url: lang + ".json",
         success: function(msg) {
-            dict = eval("(" + msg + ")");
+            dict = msg
         }
     });
 }

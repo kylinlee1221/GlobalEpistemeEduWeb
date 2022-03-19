@@ -1,9 +1,10 @@
 {
   "Home" : "主页: ",
   "Tutors" : "导师: ",
+  "UserRole": "身份",
   "Students" : "学生",
   "Tutor" : "导师",
-  "Menus" : "菜单",
-  "Login" : "登录",
-  "Sign up" : "注册"
+  "Menus": "菜单",
+  "Login": "登录",
+  "Sign up": "注册"
 }

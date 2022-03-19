@@ -1,6 +1,7 @@
 {
-  "Home" : "Home ",
+  "Home" : "Home",
   "Tutors" : "Tutors ",
+  "UserRole": "Role",
   "Students" : "Students",
   "Tutor" : "Tutor",
   "Menus" : "Menu",
