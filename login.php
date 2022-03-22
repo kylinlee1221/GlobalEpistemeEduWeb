@@ -31,7 +31,7 @@
                 if(eregi($row['role'],'student')){
                     echo 'login success '.$row['role'];
                     //echo '1';
-                    echo "<meta http-equiv='refresh' content='2;url=/student.php'>";
+                    echo "<meta http-equiv='refresh' content='2;url=/Student.php'>";
                 }
                 echo "login success! fname".$row['firstname']." ,lname: ".$row['lastname']." ,role: ".$row['role']." ,username: ".$row['username'];
             }
