@@ -1,4 +1,5 @@
 <?php
+    //session_start();
     $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
     if(!$con){
         echo "<script>alert('sql connect error')</script>";

@@ -1,13 +1,37 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
-    <title>GEE</title>
+    <meta charset="UTF-8">
+    <title>GEE - Register</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="js/translator.js"></script>
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,21 +59,15 @@
         </form>
     </div>
 </nav>
-<header>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="text-center">GEE</h1>
-                    <p class="text-center">Details about us</p>
-                    <p>&nbsp;</p>
-                    <p class="text-center"><a href="Student.php" class="btn btn-success btn-lg" lang role="button">Students</a> <a href="#" class="btn btn-primary btn-lg" lang role="button">Tutor</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
+<?php
+if(isset($_SESSION['login'])&&!$_SESSION['login']){
+    echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
+}else{
+    session_unset();
+    session_destroy();
+    echo "<div class='alert alert-success'><strong>log out success. back to <a href='index.html'>homepage</a></strong></div>";
+}
+?>
 <footer>
     <div class="container">
         <div class="row">
@@ -60,4 +78,4 @@
     </div>
 </footer>
 </body>
-</html>
+</body>

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
     if(!$con){
         echo "<script>alert('sql connect error')</script>";
@@ -23,6 +24,15 @@
         $res=mysqli_query($con,$sql);
         if($res->num_rows>0){
             while($row=$res->fetch_assoc()){
+                $_SESSION['login']=true;
+                $fullname=$row['firstname'].' '.$row['lastname'];
+                $_SESSION['fullname']=$fullname;
+                //echo $row['role'];
+                if(eregi($row['role'],'student')){
+                    echo 'login success '.$row['role'];
+                    //echo '1';
+                    echo "<meta http-equiv='refresh' content='2;url=/student.php'>";
+                }
                 echo "login success! fname".$row['firstname']." ,lname: ".$row['lastname']." ,role: ".$row['role']." ,username: ".$row['username'];
             }
         }else{
