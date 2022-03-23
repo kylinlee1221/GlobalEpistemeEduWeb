@@ -22,11 +22,12 @@
         return true;
     }
     if(check_sql_inject($classname)==true&&check_sql_inject($classdetail)==true&&check_sql_inject($classtype)){
-        $sql_insert="INSERT INTO `tutor_class` (`id`,`classname`, `classdeatil`, `classprice`, `starttime`, `endtime`, `available`, `classtype`, `tutoruser`) VALUES (null,'$classname','$classdetail','$classprice','$starttime','$endtime','$available','$classtype','$userid')";
+        $sql_insert="INSERT INTO `tutor_class` (`id`,`classname`, `classdeatil`, `classprice`, `starttime`, `endtime`, `available`, `classtype`, `tutorid`) VALUES (null,'$classname','$classdetail','$classprice','$starttime','$endtime','$available','$classtype','$userid')";
         if(mysqli_query($con,$sql_insert)){
             exit("add success! <a href='Tutors.php'>back!</a>");
         }else{
-            echo 'Sql error: '.mysql_error().'<br />';
+            echo mysqli_query($con,$sql_insert);
+            echo 'Sql error: '.mysqli_error($con).'<br />';
             echo '<a href="Tutors.php">back</a>';
         }
     }

@@ -126,7 +126,7 @@ if(!isset($_SESSION['login'])){
                                 die("error:".mysqli_connect_error());
                             }
                             $userid=$_SESSION['userid'];
-                            $sql='select * from tutor_class where tutoruser='."'{$userid}';";
+                            $sql='select * from tutor_class where tutorid='."'{$userid}';";
                             $res=mysqli_query($con,$sql);
                             if($res->num_rows>0) {
                                 while ($row = $res->fetch_assoc()) {
