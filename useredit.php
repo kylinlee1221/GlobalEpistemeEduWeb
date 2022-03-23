@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <head>
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Student</title>
+    <title>GEE - Edit info</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -55,16 +55,16 @@
         <a href="#" id="zhBtn">简体中文</a> <a href="#" id="enBtn">English</a>
         <form class="form-check-inline my-2 my-lg-0">
             <?php
-                if(isset($_SESSION['fullname'])){
-                    echo "<div class='dropdown'>";
-                    echo "<button type='button' class='btn btn-outline-primary dropdown-toggle my-2 my-lg-2' data-toggle='dropdown'>".$_SESSION['fullname']."</button>";
-                    echo "<div class='dropdown-menu'>";
-                    echo "<a class='dropdown-item' href='useredit.php'>Settings</a>";
-                    echo "<a class='dropdown-item' href='logout.php'>Logout</a>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "<a href='logout.php' class='btn btn-danger my-2 my-sm-0'>logout</a>";
-                }
+            if(isset($_SESSION['fullname'])){
+                echo "<div class='dropdown'>";
+                echo "<button type='button' class='btn btn-outline-primary dropdown-toggle my-2 my-lg-2' data-toggle='dropdown'>".$_SESSION['fullname']."</button>";
+                echo "<div class='dropdown-menu'>";
+                echo "<a class='dropdown-item' href='#'>Settings</a>";
+                echo "<a class='dropdown-item' href='logout.php'>Logout</a>";
+                echo "</div>";
+                echo "</div>";
+                echo "<a href='logout.php' class='btn btn-danger my-2 my-sm-0'>logout</a>";
+            }
             ?>
         </form>
     </div>
@@ -74,23 +74,35 @@ if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'student')){
-    echo "<div class='alert alert-danger'><strong>You are not student</strong></div>";
-    echo "<script>alert('You are not student')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Tutors.php'>";
 }
 ?>
-<header>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-
-                </div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                    $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                    if(!$con){
+                        echo "<script>alert('sql connect error')</script>";
+                        die("error:".mysqli_connect_error());
+                    }
+                    $userid=$_SESSION['userid'];
+                    $sql='select * from user where id='."'{$userid}';";
+                    $res=mysqli_query($con,$sql);
+                    if($res->num_rows>0) {
+                        while ($row = $res->fetch_assoc()) {
+                            echo "<p>" . $row['id'] . ' ' . $row['firstname'] . "</p>";
+                            //echo "<form action='#' method='post' enctype='multipart/form-data' class='needs-validation' nonvalidate>";
+                        }
+                    }else{
+                        echo "<p>Some error happened, back to <a href='index.php'>homepage</a>.";
+                    }
+                    //echo ""
+                ?>
             </div>
         </div>
     </div>
-</header>
+</section>
 <footer>
     <div class="container">
         <div class="row">
@@ -101,4 +113,3 @@ if(!isset($_SESSION['login'])){
     </div>
 </footer>
 </body>
-</html>

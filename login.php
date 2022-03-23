@@ -24,9 +24,11 @@
         $res=mysqli_query($con,$sql);
         if($res->num_rows>0){
             while($row=$res->fetch_assoc()){
+                //echo $row['id'];
                 $_SESSION['login']=true;
                 $fullname=$row['firstname'].' '.$row['lastname'];
                 $_SESSION['fullname']=$fullname;
+                $_SESSION['userid']=$row['id'];
                 $_SESSION['role']=$row['role'];
                 //echo $row['role'];
                 if(eregi($row['role'],'student')){

@@ -35,7 +35,13 @@ session_start();
         <form class="form-check-inline my-2 my-lg-0">
             <?php
                 if(isset($_SESSION['fullname'])){
-                    echo "<a href='#' class='btn btn-outline-primary my-2 my-lg-0'>".$_SESSION['fullname']."</a>";
+                    echo "<div class='dropdown'>";
+                    echo "<button type='button' class='btn btn-outline-primary dropdown-toggle my-2 my-lg-2' data-toggle='dropdown'>".$_SESSION['fullname']."</button>";
+                    echo "<div class='dropdown-menu'>";
+                    echo "<a class='dropdown-item' href='useredit.php'>Settings</a>";
+                    echo "<a class='dropdown-item' href='logout.php'>Logout</a>";
+                    echo "</div>";
+                    echo "</div>";
                     echo "<a href='logout.php' class='btn btn-danger my-2 my-sm-0'>logout</a>";
                 }else{
                     echo "<a href='Register.html' class='btn btn-outline-primary my-2 my-lg-0'>Sign up</a>";

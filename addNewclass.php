@@ -7,7 +7,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Tutor</title>
+    <title>GEE - Tutor - Add class</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -74,10 +74,6 @@ if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'Tutor')){
-    echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
-    echo "<script>alert('You are not Tutor')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Student.php'>";
 }
 ?>
 <header>
@@ -85,76 +81,55 @@ if(!isset($_SESSION['login'])){
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php
-                        if(isset($_SESSION['fullname'])){
-                            echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
-                        }
-                    ?>
-                    <p class="text-center"><a href="addNewclass.php" class="btn btn-primary btn-lg">Add new class</a></p>
+                    <form action="addCAction.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <div class="input-group mb-3">
+                            <input class="form-control" name="classname" maxlength="25" type="text" placeholder="classname" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="classdes">Class description:</label>
+                            <p>&nbsp;</p>
+                            <textarea class="form-control" rows="5" id="classdes" name="classdes" maxlength="255"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                                <input class="form-control" name="classprice" type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" placeholder="class price" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="startdate">Start date:</label>
+                            <p>&nbsp;</p>
+                            <input class="form-control" id="startdate" name="startdate" type="date" placeholder="2022-03-23" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="enddate">Start date:</label>
+                            <p>&nbsp;</p>
+                            <input class="form-control" id="enddate" name="enddate" type="date" placeholder="2022-03-23" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input class="form-control" name="available" type="number" placeholder="enter available seats here" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input class="form-control" name="classtype" type="text" placeholder="Enter class type here" maxlength="15" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="add_class">Add class</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </header>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mb-4 text-center">
-                <h2>My class</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mb-4">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>name</th>
-                            <th>price</th>
-                            <th>start time</th>
-                            <th>end time</th>
-                            <th>available</th>
-                            <th>type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                            if(!$con){
-                                echo "<script>alert('sql connect error')</script>";
-                                die("error:".mysqli_connect_error());
-                            }
-                            $userid=$_SESSION['userid'];
-                            $sql='select * from tutor_class where tutoruser='."'{$userid}';";
-                            $res=mysqli_query($con,$sql);
-                            if($res->num_rows>0) {
-                                while ($row = $res->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>".$row['classname']."</td>";
-                                    echo "<td>".$row['classprice']."</td>";
-                                    echo "<td>".$row['starttime']."</td>";
-                                    echo "<td>".$row['endtime']."</td>";
-                                    echo "<td>".$row['available']."</td>";
-                                    echo "<td>".$row['classtype']."</td>";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
-            </div>
-        </div>
-    </div>
-</footer>
 </body>
 </html>
