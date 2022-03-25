@@ -89,6 +89,19 @@ if(!isset($_SESSION['login'])){
                         if(isset($_SESSION['fullname'])){
                             echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
                         }
+                        $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                        if(!$con){
+                            echo "<script>alert('sql connect error')</script>";
+                            die("error:".mysqli_connect_error());
+                        }
+                        $userid=$_SESSION['userid'];
+                        $sql='select * from user where id='."'{$userid}';";
+                        $res=mysqli_query($con,$sql);
+                        if($res->num_rows>0) {
+                            while ($row = $res->fetch_assoc()) {
+                                echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                            }
+                        }
                     ?>
                     <p class="text-center"><a href="addNewclass.php" class="btn btn-primary btn-lg">Add new class</a></p>
                 </div>

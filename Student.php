@@ -110,7 +110,7 @@ if(!isset($_SESSION['login'])){
                             <button class="btn btn-success text-center" type="submit">Search</button>
                         </form>
                     </p>
-                    <p class="text-center"><a href="#" class="btn btn-primary">Add amount</a> </p>
+                    <p class="text-center"><a href="addAmount.php" class="btn btn-primary">Add amount</a> </p>
                 </div>
             </div>
         </div>

@@ -1,16 +1,11 @@
 <?php
     session_start();
+    //require("include/connector.php");
     $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
     if(!$con){
         echo "<script>alert('sql connect error')</script>";
         die("error:".mysqli_connect_error());
 
-    }
-    $user=$_POST['username'];
-    $pass=$_POST['password'];
-    if($user==null||$pass==null){
-        echo "<script>alert('www！')</script>";
-        die("not null exception!");
     }
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
@@ -18,6 +13,12 @@
             exit("input not valid");
         }
         return true;
+    }
+    $user=$_POST['username'];
+    $pass=$_POST['password'];
+    if($user==null||$pass==null){
+        echo "<script>alert('www！')</script>";
+        die("not null exception!");
     }
     if(check_sql_inject($user)==true&&check_sql_inject($pass)==true){
         $sql='select * from user where username='."'{$user}'and password="."'$pass';";
@@ -42,7 +43,9 @@
                 //echo "login success! fname".$row['firstname']." ,lname: ".$row['lastname']." ,role: ".$row['role']." ,username: ".$row['username'];
             }
         }else{
-            echo "0 results";
+            echo "<p><strong>You should <a href='Login.html'>login first!</a> </strong></p>";
+            echo "<script>alert('login first！')</script>";
+            echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
         }
     }
     $con->close();
