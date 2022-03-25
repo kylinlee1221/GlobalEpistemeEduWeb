@@ -16,9 +16,7 @@
     //echo "userid: ".$userid." ,classname: ".$classname." ,class detail: ".$classdetail." ,class price: ".$classprice." ,start time: ".$starttime." ,end time: ".$endtime." ,available: ".$available." ,class type: ".$classtype." .";
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
-        if(eregi($str,$value)){
-            exit("input not valid");
-        }
+
         return true;
     }
     if(check_sql_inject($classname)==true&&check_sql_inject($classdetail)==true&&check_sql_inject($classtype)){

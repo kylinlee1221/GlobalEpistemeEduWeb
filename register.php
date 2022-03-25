@@ -20,9 +20,7 @@
     }
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
-        if(eregi($str,$value)){
-            exit("input not valid");
-        }
+
         return true;
     }
     if(check_sql_inject($username)==true&&check_sql_inject($password)==true){
@@ -32,7 +30,7 @@
             echo 'Error',$username,' exists<a href="javascript:history.back(-1);">back</a>';
             exit;
         }
-        if(eregi($roles,'Select your Role here')){
+        if(strcmp($roles,'Select your Role here')==0){
             echo 'Error','please select role',' <a href="javascript:history.back(-1);">back</a>';
             exit;
         }

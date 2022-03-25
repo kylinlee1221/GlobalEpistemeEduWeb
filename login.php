@@ -9,9 +9,7 @@
     }
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
-        if(eregi($str,$value)){
-            exit("input not valid");
-        }
+
         return true;
     }
     $user=$_POST['username'];
@@ -32,11 +30,11 @@
                 $_SESSION['userid']=$row['id'];
                 $_SESSION['role']=$row['role'];
                 //echo $row['role'];
-                if(eregi($row['role'],'student')){
+                if(strcmp($row['role'],'student')==0){
                     echo 'login success '.$row['role'];
                     //echo '1';
                     echo "<meta http-equiv='refresh' content='1;url=/Student.php'>";
-                }elseif (eregi($row['role'],'Tutor')){
+                }elseif (strcmp($row['role'],'Tutor')==0){
                     echo 'login success '.$row['role'];
                     echo "<meta http-equiv='refresh' content='1;url=/Tutors.php'>";
                 }

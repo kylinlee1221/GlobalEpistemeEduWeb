@@ -74,7 +74,7 @@ if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'student')){
+}elseif (strcmp($_SESSION['role'],'student')!=0){
     echo "<div class='alert alert-danger'><strong>You are not student</strong></div>";
     echo "<script>alert('You are not student')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/Tutors.php'>";

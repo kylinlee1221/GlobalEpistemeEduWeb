@@ -74,7 +74,7 @@ if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'Tutor')){
+}elseif (strcmp($_SESSION['role'],'Tutor')!=0){
     echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
     echo "<script>alert('You are not Tutor')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/Student.php'>";
@@ -133,7 +133,7 @@ if(!isset($_SESSION['login'])){
                     </thead>
                     <tbody>
                         <?php
-                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                            $con=mysqli_connect("127.0.0.1","gesql","li1221#xpk","gesql");
                             if(!$con){
                                 echo "<script>alert('sql connect error')</script>";
                                 die("error:".mysqli_connect_error());
