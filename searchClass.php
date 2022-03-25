@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-12">
                     <?php
-                        $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                        $con=mysqli_connect("127.0.0.1","gesql","li1221#xpk","gesql");
                         if(!$con){
                             echo "<script>alert('sql connect error')</script>";
                             die("error:".mysqli_connect_error());
