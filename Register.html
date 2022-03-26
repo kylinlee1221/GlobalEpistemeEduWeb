@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(Current)</span></a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Tutors</a></li>
+            <li class="nav-item"><a class="nav-link" href="show_consultant.php">Consultants</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Menu </a>
@@ -75,11 +75,16 @@
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
-                        <div class="input-group mt-3 mb-3">
+                        <div class="input-group mt-4 mb-4">
                             <select name="roles" class="custom-select">
                                 <option selected>Select your Role here</option>
-                                <option value="student" lang>Student</option>
-                                <option value="tutor" lang>Tutor</option>
+                                <option value="client" lang>client</option>
+                                <option value="consultants" lang>consultants</option>
+                            </select>
+                            <select name="gender" class="custom-select">
+                                <option selected>Select your gender</option>
+                                <option value="male" lang>male</option>
+                                <option value="female" lang>female</option>
                             </select>
                             <input type="text" class="form-control" placeholder="First name" name="firstname" required>
                             <div class="valid-feedback">Valid.</div>
@@ -90,6 +95,14 @@
                         </div>
                         <div class="input-group mb-3">
                             <input class="form-control" name="email" type="email" placeholder="email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="userdes">User description:</label>
+                            <textarea class="form-control" rows="5" id="userdes" name="userdes" maxlength="255"></textarea>
+                        </div>
+                        <div class="input-group custom-file mb-3">
+                            <input type="file" class="form-control custom-file-input" id="userimg" name="userimg">
+                            <label class="custom-file-label" for="userimg">choose img file</label>
                         </div>
                         <button type="submit" class="btn btn-primary" id="signup_form" lang>Sign up</button>
                     </form>

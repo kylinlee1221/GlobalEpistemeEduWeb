@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Student - Buy class</title>
+    <title>GEE - Client - Buy class</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -55,7 +55,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(Current)</span></a> </li>
-                <li class="nav-item"><a class="nav-link" href="#">Tutors</a></li>
+                <li class="nav-item"><a class="nav-link" href="show_consultant.php">Consultants</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"> Menu </a>
@@ -113,7 +113,7 @@
                                                 $update_info_sql3="UPDATE `user` SET `amount` = ".$tutor_amount." WHERE `id` = "."'{$tutorid}'";
                                                 $update_info_sql2="UPDATE `tutor_class` SET `available` = ".$res_available." WHERE `id` = "."'{$classid}'";
                                                 if(mysqli_query($con,$update_info_sql)&&mysqli_query($con,$update_info_sql2)&&mysqli_query($con,$update_info_sql3)){
-                                                    echo "<div class='alert alert-success'><strong>Buy success back to<a href='Student.php'>Student page</a></strong></div>";
+                                                    echo "<div class='alert alert-success'><strong>Buy success back to<a href='Client.php'>Client page</a></strong></div>";
                                                 }
                                             }
                                         }
@@ -127,7 +127,7 @@
                         //echo "success!";
 
                     }else{
-                        echo "<div class='alert alert-danger'><strong>You should <a href='#'>Add amount</a> first! </strong></div>";
+                        echo "<div class='alert alert-danger'><strong>You should <a href='addAmount.php'>Add amount</a> first! </strong></div>";
                     }
                 }
             }
@@ -137,7 +137,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
+                    <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
                 </div>
             </div>
         </div>

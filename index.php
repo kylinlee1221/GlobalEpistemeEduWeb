@@ -20,7 +20,7 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(Current)</span></a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Tutors</a></li>
+            <li class="nav-item"><a class="nav-link" href="show_consultant.php">Consultants</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Menu </a>
@@ -59,7 +59,7 @@ session_start();
                     <h1 class="text-center">GEE</h1>
                     <p class="text-center">Details about us</p>
                     <p>&nbsp;</p>
-                    <p class="text-center"><a href="Student.php" class="btn btn-success btn-lg" lang role="button">Students</a> <a href="Tutors.php" class="btn btn-primary btn-lg" lang role="button">Tutor</a></p>
+                    <p class="text-center"><a href="Client.php" class="btn btn-success btn-lg" lang role="button">Client</a> <a href="Consultants.php" class="btn btn-primary btn-lg" lang role="button">Consultants</a></p>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
+                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
             </div>
         </div>
     </div>

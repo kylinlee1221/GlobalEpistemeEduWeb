@@ -20,9 +20,9 @@
                 $res_amount=$amount+$row['amount'];
                 $update_info_sql="UPDATE `user` SET `amount` = ".$res_amount." WHERE `id` = "."'{$userid}'";
                 if(mysqli_query($con,$update_info_sql)){
-                    echo "<p><strong>Add success <a href='Student.php'>back!</a> </strong></p>";
+                    echo "<p><strong>Add success <a href='Client.php'>back!</a> </strong></p>";
                     echo "<script>alert('Add success！')</script>";
-                    echo "<meta http-equiv='refresh' content='0.5;url=/Student.php'>";
+                    echo "<meta http-equiv='refresh' content='0.5;url=/Client.php'>";
                 }
             }
         }else{

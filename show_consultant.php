@@ -7,7 +7,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Tutor</title>
+    <title>GEE - View all consultant</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(Current)</span></a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Tutors</a></li>
+            <li class="nav-item"><a class="nav-link" href="show_consultant.php">Consultants</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Menu </a>
@@ -64,98 +64,49 @@ session_start();
                 echo "</div>";
                 echo "</div>";
                 echo "<a href='logout.php' class='btn btn-danger my-2 my-sm-0'>logout</a>";
+            }else{
+                echo "<a href='Register.html' class='btn btn-outline-primary my-2 my-lg-0'>Sign up</a>";
+                echo "<a href='Login.html' class='btn btn-outline-success my-2 my-sm-0'>Login</a>";
             }
             ?>
         </form>
     </div>
 </nav>
-<?php
-if(!isset($_SESSION['login'])){
-    echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
-    echo "<script>alert('login first！')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'Tutor')){
-    echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
-    echo "<script>alert('You are not Tutor')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Student.php'>";
-}
-?>
-<header>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
-                        if(isset($_SESSION['fullname'])){
-                            echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
-                        }
-                        $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                        if(!$con){
-                            echo "<script>alert('sql connect error')</script>";
-                            die("error:".mysqli_connect_error());
-                        }
-                        $userid=$_SESSION['userid'];
-                        $sql='select * from user where id='."'{$userid}';";
-                        $res=mysqli_query($con,$sql);
-                        if($res->num_rows>0) {
-                            while ($row = $res->fetch_assoc()) {
-                                echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
-                            }
-                        }
-                    ?>
-                    <p class="text-center"><a href="addNewclass.php" class="btn btn-primary btn-lg">Add new class</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 <section>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mb-4 text-center">
-                <h2>My class</h2>
+                <h2>Consultant list:</h2>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mb-4">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>name</th>
-                            <th>price</th>
-                            <th>start time</th>
-                            <th>end time</th>
-                            <th>available</th>
-                            <th>type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                            if(!$con){
-                                echo "<script>alert('sql connect error')</script>";
-                                die("error:".mysqli_connect_error());
-                            }
-                            $userid=$_SESSION['userid'];
-                            $sql='select * from tutor_class where tutorid='."'{$userid}';";
-                            $res=mysqli_query($con,$sql);
-                            if($res->num_rows>0) {
-                                while ($row = $res->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>".$row['classname']."</td>";
-                                    echo "<td>".$row['classprice']."</td>";
-                                    echo "<td>".$row['starttime']."</td>";
-                                    echo "<td>".$row['endtime']."</td>";
-                                    echo "<td>".$row['available']."</td>";
-                                    echo "<td>".$row['classtype']."</td>";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </tbody>
-                </table>
+                <?php
+                    $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                    if(!$con){
+                        echo "<script>alert('sql connect error')</script>";
+                        die("error:".mysqli_connect_error());
+                    }
+                    //$userid=$_SESSION['userid'];
+                    $role='consultants';
+                    $sql='select * from user where role='."'{$role}';";
+                    $res=mysqli_query($con,$sql);
+                    if($res->num_rows>0){
+                        while($row=$res->fetch_assoc()){
+                            echo "<div class='media'>";
+                            $imgpth=$row['img_path'];
+                            echo "<img src='$imgpth' class='align-self-center mr-3' style='width:60px'>";
+                            echo "<div class='media-body'>";
+                            echo "<h4>".$row['firstname'].' '.$row['lastname']."</h4>";
+                            echo "<p>".$row['description']."</p>";
+                            echo "<a href='#'>Details</a>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
@@ -164,10 +115,9 @@ if(!isset($_SESSION['login'])){
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
+                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
             </div>
         </div>
     </div>
 </footer>
 </body>
-</html>

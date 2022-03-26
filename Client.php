@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Student</title>
+    <title>GEE - Client</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active"> <a class="nav-link" href="index.php">Home <span class="sr-only">(Current)</span></a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Tutors</a></li>
+            <li class="nav-item"><a class="nav-link" href="show_consultant.php">Consultants</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Menu </a>
@@ -74,10 +74,10 @@ if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-}elseif (!eregi($_SESSION['role'],'student')){
+}elseif (strcmp($_SESSION['role'],'client')!=0 && strcmp($_SESSION['role'],'Client')!=0){
     echo "<div class='alert alert-danger'><strong>You are not student</strong></div>";
     echo "<script>alert('You are not student')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Tutors.php'>";
+    echo "<meta http-equiv='refresh' content='0.5;url=/Consultants.php'>";
 }
 ?>
 <header>
@@ -106,8 +106,15 @@ if(!isset($_SESSION['login'])){
                     ?>
                     <p>
                         <form class="text-center" action="searchClass.php" method="post" enctype="multipart/form-data">
-                            <input class="form-control" type="text" name="classname" placeholder="Search class">
-                            <button class="btn btn-success text-center" type="submit">Search</button>
+                            <div class="input-group mb-2 mt-2">
+                                <select name="searchBy" class="custom-select">
+                                    <option value="industry" lang>industry</option>
+                                    <option value="name" lang selected>service name</option>
+                                </select>
+                                <input class="form-control" type="text" name="classname" placeholder="Search service">
+                            </div>
+                            <p>&nbsp;</p>
+                            <button class="btn btn-success text-center" type="submit">  Search  </button>
                         </form>
                     </p>
                     <p class="text-center"><a href="addAmount.php" class="btn btn-primary">Add amount</a> </p>
@@ -120,7 +127,7 @@ if(!isset($_SESSION['login'])){
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mb-4 text-center">
-                <h2>My class</h2>
+                <h2>My service</h2>
             </div>
         </div>
     </div>
@@ -157,13 +164,18 @@ if(!isset($_SESSION['login'])){
                                 echo "<td>" . $row2['endtime'] . "</td>";
                                 echo "<td>" . $row2['available'] . "</td>";
                                 echo "<td>" . $row2['classtype'] . "</td>";
-                                echo "<td> <a href='#' class='btn btn-primary'>Go Class</a></td>";
+                                echo "<td> <a href='#' class='btn btn-primary'>Go to Action</a></td>";
                                 echo "</tr>";
                             }
                             echo "</tbody>";
                         }
                     }
                     echo "</table>";
+                }else{
+                    echo "<div class='alert alert-light text-center alert-dismissible'>";
+                    echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
+                    echo "<strong>Note:</strong> You should search service or add amount first";
+                    echo "</div>";
                 }
                 $con->close();
                 ?>
@@ -172,7 +184,7 @@ if(!isset($_SESSION['login'])){
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
+                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
             </div>
         </div>
     </div>

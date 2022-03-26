@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <head>
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="with=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>GEE - Client - Search</title>
+    <title>GEE - Consultants</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -70,40 +70,40 @@
     </div>
 </nav>
 <?php
-    if(!isset($_SESSION['login'])){
-        echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
-        echo "<script>alert('login first！')</script>";
-        echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
-    }
+if(!isset($_SESSION['login'])){
+    echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
+    echo "<script>alert('login first！')</script>";
+    echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
+}elseif (strcmp($_SESSION['role'],'consultants')!=0&&strcmp($_SESSION['role'],'Consultants')!=0){
+    echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
+    echo "<script>alert('You are not consultants')</script>";
+    echo "<meta http-equiv='refresh' content='0.5;url=/Client.php'>";
+}
 ?>
 <header>
     <div class="jumbotron">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                     <?php
+                        if(isset($_SESSION['fullname'])){
+                            echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
+                        }
                         $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
                         if(!$con){
                             echo "<script>alert('sql connect error')</script>";
                             die("error:".mysqli_connect_error());
                         }
                         $userid=$_SESSION['userid'];
-                        $classname=$_POST['classname'];
-                        $searchBy=$_POST['searchBy'];
-                        $sql='select * from tutor_class where classname like '."'%$classname%';";
-                        $sql_ind='select * from tutor_class where industry like '."'%$classname%';";
-                        if(strcmp($searchBy,'industry')==0){
-                            $res=mysqli_query($con,$sql_ind);
-                        }elseif (strcmp($searchBy,'name')==0){
-                            $res=mysqli_query($con,$sql);
-                        }
-
-                        //echo mysqli_error($con);
+                        $sql='select * from user where id='."'{$userid}';";
+                        $res=mysqli_query($con,$sql);
                         if($res->num_rows>0) {
-                            echo "<p class='text-center'>There are ".$res->num_rows." result(s).</p>";
+                            while ($row = $res->fetch_assoc()) {
+                                echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                            }
                         }
-                        $con->close();
                     ?>
+                    <p class="text-center"><a href="addNewclass.php" class="btn btn-primary btn-lg">Add new service</a></p>
                 </div>
             </div>
         </div>
@@ -113,53 +113,49 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mb-4 text-center">
-                <h2>Result(s) list</h2>
+                <h2>My service</h2>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mb-4">
-                <?php
-                if($res->num_rows>0) {
-                    echo "<table class='table table-bordered'>";
-                    echo "<thead>
-                                <tr>
-                                    <th>name</th>
-                                    <th>price</th>
-                                    <th>start time</th>
-                                    <th>end time</th>
-                                    <th>available</th>
-                                    <th>type</th>
-                                    <th>Industry</th>
-                                    <th>More info</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>";
-                    echo "<tbody>";
-                }
-                ?>
-
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>price</th>
+                            <th>start time</th>
+                            <th>end time</th>
+                            <th>available</th>
+                            <th>type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
+                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                            if(!$con){
+                                echo "<script>alert('sql connect error')</script>";
+                                die("error:".mysqli_connect_error());
+                            }
+                            $userid=$_SESSION['userid'];
+                            $sql='select * from tutor_class where tutorid='."'{$userid}';";
+                            $res=mysqli_query($con,$sql);
                             if($res->num_rows>0) {
                                 while ($row = $res->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['classname'] . "</td>";
-                                    echo "<td>" . $row['classprice'] . "</td>";
-                                    echo "<td>" . $row['starttime'] . "</td>";
-                                    echo "<td>" . $row['endtime'] . "</td>";
-                                    echo "<td>" . $row['available'] . "</td>";
-                                    echo "<td>" . $row['classtype'] . "</td>";
-                                    echo "<td>" . $row['industry'] . "</td>";
-                                    echo "<td>" . $row['other'] ."</td>";
-                                    echo "<td> <a href='buyClassAction.php?classid=".$row['id']."&classprice=".$row['classprice']."' class='btn btn-primary'>Buy this</a></td>";
+                                    echo "<td>".$row['classname']."</td>";
+                                    echo "<td>".$row['classprice']."</td>";
+                                    echo "<td>".$row['starttime']."</td>";
+                                    echo "<td>".$row['endtime']."</td>";
+                                    echo "<td>".$row['available']."</td>";
+                                    echo "<td>".$row['classtype']."</td>";
                                     echo "</tr>";
                                 }
                             }
-
-                echo "</tbody>
-                </table>";
-                ?>
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -168,9 +164,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Edu.</p>
+                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
             </div>
         </div>
     </div>
 </footer>
 </body>
+</html>
