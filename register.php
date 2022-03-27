@@ -1,5 +1,5 @@
 <?php
-    //session_start();
+    session_start();
     $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
     $target_dir="assets/user_upload/";
     $target_file=$target_dir.basename($_FILES["userimg"]["name"]);
@@ -25,6 +25,10 @@
     if($username==null||$password==null){
         echo "<script>alert('www！')</script>";
         die("not null exception!");
+    }
+    if($_POST['verifyCode']!=$_SESSION['helloweba_num']){
+        echo "<script>alert('verifyCode not correct!')</script>";
+        die("verifyCode exception!");
     }
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
@@ -53,6 +57,8 @@
         }
         $sql_insert="insert into user(`username`, `password`, `email`, `firstname`, `lastname`, `role`, `gender`, `description`, `amount`, `img_path`) VALUES ('$username','$password','$email','$fname','$lname','$roles','$gender', '$description', 0.0, '$img_path')";
         if(mysqli_query($con,$sql_insert)){
+            session_unset();
+            session_destroy();
             exit('register success!<a href="Login.html">Login</a>');
         }else{
             echo 'Sql error: '.mysql_error().'<br />';

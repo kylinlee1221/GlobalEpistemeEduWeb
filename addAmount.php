@@ -76,6 +76,10 @@ session_start();
         echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
     }
     ?>
+    <div class='alert alert-light text-center alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <strong>Note:</strong> our transactions are in US dollars
+    </div>
     <header>
         <div class="jumbotron">
             <div class="container">

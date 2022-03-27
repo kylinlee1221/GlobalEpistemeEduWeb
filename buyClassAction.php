@@ -10,9 +10,7 @@
     $classprice=$_GET['classprice'];
     function check_sql_inject($value=null){
         $str = 'select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile';
-        if(eregi($str,$value)){
-            exit("input not valid");
-        }
+
         return true;
     }
 ?>

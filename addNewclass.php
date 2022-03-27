@@ -83,19 +83,19 @@ if(!isset($_SESSION['login'])){
                 <div class="col-md-12">
                     <form action="addCAction.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                         <div class="input-group mb-3">
-                            <input class="form-control" name="classname" maxlength="25" type="text" placeholder="classname" required>
+                            <input class="form-control" name="classname" maxlength="25" type="text" placeholder="servicename" required>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="input-group mb-3">
-                            <label for="classdes">Class description:</label>
+                            <label for="classdes">service description:</label>
                             <p>&nbsp;</p>
                             <textarea class="form-control" rows="5" id="classdes" name="classdes" maxlength="255"></textarea>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
-                                <input class="form-control" name="classprice" type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" placeholder="class price" required>
+                                <input class="form-control" name="classprice" type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" placeholder="service price" required>
                                 <div class="valid-feedback">Valid.</div>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
@@ -120,11 +120,21 @@ if(!isset($_SESSION['login'])){
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="input-group mb-3">
-                            <input class="form-control" name="classtype" type="text" placeholder="Enter class type here" maxlength="15" required>
+                            <input class="form-control" name="classtype" type="text" placeholder="Enter service type here" maxlength="15" required>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="add_class">Add class</button>
+                        <div class="input-group mb-3">
+                            <label for="industry">service industry:</label>
+                            <p>&nbsp;</p>
+                            <textarea class="form-control" rows="5" id="industry" name="industry" maxlength="255"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label for="industry">service comment:</label>
+                            <p>&nbsp;</p>
+                            <textarea class="form-control" rows="5" id="comment" name="comment" maxlength="255"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="add_class">Add service</button>
                     </form>
                 </div>
             </div>

@@ -73,11 +73,11 @@
 if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
+    echo "<meta http-equiv='refresh' content='0.1;url=/index.php'>";
 }elseif (strcmp($_SESSION['role'],'client')!=0 && strcmp($_SESSION['role'],'Client')!=0){
     echo "<div class='alert alert-danger'><strong>You are not student</strong></div>";
     echo "<script>alert('You are not student')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Consultants.php'>";
+    echo "<meta http-equiv='refresh' content='0.1;url=/Consultants.php'>";
 }
 ?>
 <header>
@@ -86,20 +86,22 @@ if(!isset($_SESSION['login'])){
             <div class="row">
                 <div class="col-md-12">
                     <?php
-                        if(isset($_SESSION['fullname'])){
-                            echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
-                        }
-                        $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                        if(!$con){
-                            echo "<script>alert('sql connect error')</script>";
-                            die("error:".mysqli_connect_error());
-                        }
-                        $userid=$_SESSION['userid'];
-                        $sql='select * from user where id='."'{$userid}';";
-                        $res=mysqli_query($con,$sql);
-                        if($res->num_rows>0) {
-                            while ($row = $res->fetch_assoc()) {
-                                echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                        if(isset($_SESSION['login'])){
+                            if(isset($_SESSION['fullname'])){
+                                echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
+                            }
+                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                            if(!$con){
+                                echo "<script>alert('sql connect error')</script>";
+                                die("error:".mysqli_connect_error());
+                            }
+                            $userid=$_SESSION['userid'];
+                            $sql='select * from user where id='."'{$userid}';";
+                            $res=mysqli_query($con,$sql);
+                            if($res->num_rows>0) {
+                                while ($row = $res->fetch_assoc()) {
+                                    echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                                }
                             }
                         }
                         //$con->close();
@@ -135,11 +137,12 @@ if(!isset($_SESSION['login'])){
         <div class="row">
             <div class="col-lg-12 mb-4">
                 <?php
-                $sql2='select * from student_class where studentid='."'{$userid}';";
-                $res2=mysqli_query($con,$sql2);
-                if($res2->num_rows>0) {
-                    echo "<table class='table table-bordered'>";
-                    echo "<thead>
+                if(isset($_SESSION['login'])){
+                    $sql2='select * from student_class where studentid='."'{$userid}';";
+                    $res2=mysqli_query($con,$sql2);
+                    if($res2->num_rows>0) {
+                        echo "<table class='table table-bordered'>";
+                        echo "<thead>
                                 <tr>
                                     <th>name</th>
                                     <th>price</th>
@@ -151,33 +154,34 @@ if(!isset($_SESSION['login'])){
                                 </tr>
                                 </thead>";
 
-                    while ($row = $res2->fetch_assoc()) {
-                        $sql3='select * from tutor_class where id='."'{$row['classid']}';";
-                        $res3=mysqli_query($con,$sql3);
-                        echo "<tbody>";
-                        if($res3->num_rows>0){
-                            while($row2=$res3->fetch_assoc()){
-                                echo "<tr>";
-                                echo "<td>" . $row2['classname'] . "</td>";
-                                echo "<td>" . $row2['classprice'] . "</td>";
-                                echo "<td>" . $row2['starttime'] . "</td>";
-                                echo "<td>" . $row2['endtime'] . "</td>";
-                                echo "<td>" . $row2['available'] . "</td>";
-                                echo "<td>" . $row2['classtype'] . "</td>";
-                                echo "<td> <a href='#' class='btn btn-primary'>Go to Action</a></td>";
-                                echo "</tr>";
+                        while ($row = $res2->fetch_assoc()) {
+                            $sql3='select * from tutor_class where id='."'{$row['classid']}';";
+                            $res3=mysqli_query($con,$sql3);
+                            echo "<tbody>";
+                            if($res3->num_rows>0){
+                                while($row2=$res3->fetch_assoc()){
+                                    echo "<tr>";
+                                    echo "<td>" . $row2['classname'] . "</td>";
+                                    echo "<td>" . $row2['classprice'] . "</td>";
+                                    echo "<td>" . $row2['starttime'] . "</td>";
+                                    echo "<td>" . $row2['endtime'] . "</td>";
+                                    echo "<td>" . $row2['available'] . "</td>";
+                                    echo "<td>" . $row2['classtype'] . "</td>";
+                                    echo "<td> <a href='#' class='btn btn-primary'>Go to Action</a></td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";
                             }
-                            echo "</tbody>";
                         }
+                        echo "</table>";
+                    }else{
+                        echo "<div class='alert alert-light text-center alert-dismissible'>";
+                        echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
+                        echo "<strong>Note:</strong> You should search service or add amount first";
+                        echo "</div>";
                     }
-                    echo "</table>";
-                }else{
-                    echo "<div class='alert alert-light text-center alert-dismissible'>";
-                    echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
-                    echo "<strong>Note:</strong> You should search service or add amount first";
-                    echo "</div>";
+                    $con->close();
                 }
-                $con->close();
                 ?>
 </section>
 <footer>

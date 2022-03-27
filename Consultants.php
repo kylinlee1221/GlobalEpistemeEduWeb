@@ -73,11 +73,11 @@ session_start();
 if(!isset($_SESSION['login'])){
     echo "<div class='alert alert-danger'><strong>You should <a href='Login.html'>login first!</a> </strong></div>";
     echo "<script>alert('login first！')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
+    echo "<meta http-equiv='refresh' content='0.1;url=/index.php'>";
 }elseif (strcmp($_SESSION['role'],'consultants')!=0&&strcmp($_SESSION['role'],'Consultants')!=0){
     echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
     echo "<script>alert('You are not consultants')</script>";
-    echo "<meta http-equiv='refresh' content='0.5;url=/Client.php'>";
+    echo "<meta http-equiv='refresh' content='0.1;url=/Client.php'>";
 }
 ?>
 <header>
@@ -86,20 +86,22 @@ if(!isset($_SESSION['login'])){
             <div class="row">
                 <div class="col-md-12">
                     <?php
-                        if(isset($_SESSION['fullname'])){
-                            echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
-                        }
-                        $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                        if(!$con){
-                            echo "<script>alert('sql connect error')</script>";
-                            die("error:".mysqli_connect_error());
-                        }
-                        $userid=$_SESSION['userid'];
-                        $sql='select * from user where id='."'{$userid}';";
-                        $res=mysqli_query($con,$sql);
-                        if($res->num_rows>0) {
-                            while ($row = $res->fetch_assoc()) {
-                                echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                        if(isset($_SESSION['login'])){
+                            if(isset($_SESSION['fullname'])){
+                                echo "<h1 class='text-center'> Welcome back ".$_SESSION['fullname']."</h1>";
+                            }
+                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                            if(!$con){
+                                echo "<script>alert('sql connect error')</script>";
+                                die("error:".mysqli_connect_error());
+                            }
+                            $userid=$_SESSION['userid'];
+                            $sql='select * from user where id='."'{$userid}';";
+                            $res=mysqli_query($con,$sql);
+                            if($res->num_rows>0) {
+                                while ($row = $res->fetch_assoc()) {
+                                    echo "<p class='text-center'>Your account amount is: ".$row['amount']."</p>";
+                                }
                             }
                         }
                     ?>
@@ -129,28 +131,32 @@ if(!isset($_SESSION['login'])){
                             <th>end time</th>
                             <th>available</th>
                             <th>type</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
-                            if(!$con){
-                                echo "<script>alert('sql connect error')</script>";
-                                die("error:".mysqli_connect_error());
-                            }
-                            $userid=$_SESSION['userid'];
-                            $sql='select * from tutor_class where tutorid='."'{$userid}';";
-                            $res=mysqli_query($con,$sql);
-                            if($res->num_rows>0) {
-                                while ($row = $res->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>".$row['classname']."</td>";
-                                    echo "<td>".$row['classprice']."</td>";
-                                    echo "<td>".$row['starttime']."</td>";
-                                    echo "<td>".$row['endtime']."</td>";
-                                    echo "<td>".$row['available']."</td>";
-                                    echo "<td>".$row['classtype']."</td>";
-                                    echo "</tr>";
+                            if(isset($_SESSION['login'])){
+                                $con=mysqli_connect("127.0.0.1:33065","root","","gesql");
+                                if(!$con){
+                                    echo "<script>alert('sql connect error')</script>";
+                                    die("error:".mysqli_connect_error());
+                                }
+                                $userid=$_SESSION['userid'];
+                                $sql='select * from tutor_class where tutorid='."'{$userid}';";
+                                $res=mysqli_query($con,$sql);
+                                if($res->num_rows>0) {
+                                    while ($row = $res->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>".$row['classname']."</td>";
+                                        echo "<td>".$row['classprice']."</td>";
+                                        echo "<td>".$row['starttime']."</td>";
+                                        echo "<td>".$row['endtime']."</td>";
+                                        echo "<td>".$row['available']."</td>";
+                                        echo "<td>".$row['classtype']."</td>";
+                                        echo "<td><a href='#' class='btn btn-primary'>View Details</a><a href='deleteCAction.php?serviceId=".$row['id']."' class='btn btn-danger'>Drop Service</a></td>";
+                                        echo "</tr>";
+                                    }
                                 }
                             }
                         ?>
