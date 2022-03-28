@@ -167,10 +167,12 @@ if(!isset($_SESSION['login'])){
     </div>
 </section>
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+                </div>
             </div>
         </div>
     </div>

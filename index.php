@@ -57,7 +57,7 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="text-center">GEE</h1>
-                    <p class="text-center">Details about us</p>
+                    <p class="text-center">Details <a href="#aboutUs"> about us</a></p>
                     <p>&nbsp;</p>
                     <p class="text-center"><a href="Client.php" class="btn btn-success btn-lg" lang role="button">Client</a> <a href="Consultants.php" class="btn btn-primary btn-lg" lang role="button">Consultants</a></p>
                 </div>
@@ -65,12 +65,23 @@ session_start();
         </div>
     </div>
 </header>
-
-<footer>
+<section>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+                <h2 id="aboutUs" class="text-center">About us</h2>
+                <p class="text-center">Global Episteme Exousia aims to be an online platform that matches academic and industrial experts in the fields of cutting edge technologies such as artificial intelligence, aerospace and aeronautics, biomedicine and genetic engineering, with corporations, media institutions and students with educational needs for decision making. We hope to bridge the information gap between academia and industries across the Asia-pacific and make technological innovations more ethical and accountable. </p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+                </div>
             </div>
         </div>
     </div>

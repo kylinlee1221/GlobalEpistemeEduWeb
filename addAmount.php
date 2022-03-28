@@ -76,7 +76,7 @@ session_start();
         echo "<meta http-equiv='refresh' content='0.5;url=/index.php'>";
     }
     ?>
-    <div class='alert alert-light text-center alert-dismissible'>
+    <div class='alert alert-warning text-center alert-dismissible'>
         <button type='button' class='close' data-dismiss='alert'>&times;</button>
         <strong>Note:</strong> our transactions are in US dollars
     </div>
@@ -105,7 +105,7 @@ session_start();
                         //$con->close();
                         ?>
                         <form class="text-center form-inline" action="addAAction.php" method="post" enctype="multipart/form-data">
-                            <input class="form-control" type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" name="amountprice" placeholder="amount" required>
+                            <input class="form-control text-center" type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" name="amountprice" placeholder="amount" required>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                             <button class="btn btn-success text-center" type="submit">Add</button>
@@ -116,10 +116,12 @@ session_start();
         </div>
     </header>
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-center">Copyright 2022 Global Episteme Exousia.</p>
+                    </div>
                 </div>
             </div>
         </div>
