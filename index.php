@@ -11,17 +11,6 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="js/translator.js"></script>
-    <style>
-        .jumbotron{
-            background: url(assets/banner.gif);
-            background-repeat: no-repeat;
-            background-position: center;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            animation-iteration-count: 1;
-            -webkit-animation-iteration-count: 1;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
