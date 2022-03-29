@@ -91,11 +91,12 @@ if(!isset($_SESSION['login'])){
                     $res=mysqli_query($con,$sql);
                     if($res->num_rows>0) {
                         while ($row = $res->fetch_assoc()) {
-                            echo "<p>" . $row['id'] . ' ' . $row['firstname'] . "</p>";
+                            //echo "<p>" . $row['id'] . ' ' . $row['firstname'] . "</p>";
                             //echo "<form action='#' method='post' enctype='multipart/form-data' class='needs-validation' nonvalidate>";
+                            echo "<div class='alert alert-success'>Please wait this function in the future.<a href='index.php'>Back to homepage</a></div>";
                         }
                     }else{
-                        echo "<p>Some error happened, back to <a href='index.php'>homepage</a>.";
+                        echo "<div class='alert alert-success'>Please wait this function in the future.<a href='index.php'>Back to homepage</a></div>";
                     }
                     //echo ""
                 ?>

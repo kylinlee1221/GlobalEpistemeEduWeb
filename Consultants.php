@@ -75,7 +75,7 @@ if(!isset($_SESSION['login'])){
     echo "<script>alert('login first！')</script>";
     echo "<meta http-equiv='refresh' content='0.1;url=/index.php'>";
 }elseif (strcmp($_SESSION['role'],'consultants')!=0&&strcmp($_SESSION['role'],'Consultants')!=0){
-    echo "<div class='alert alert-danger'><strong>You are not Tutor</strong></div>";
+    echo "<div class='alert alert-danger'><strong>You are not consultants</strong></div>";
     echo "<script>alert('You are not consultants')</script>";
     echo "<meta http-equiv='refresh' content='0.1;url=/Client.php'>";
 }

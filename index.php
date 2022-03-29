@@ -56,10 +56,9 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="text-center">GEE</h1>
-                    <p class="text-center">Details <a href="#aboutUs"> about us</a></p>
                     <p>&nbsp;</p>
-                    <p class="text-center"><a href="Client.php" class="btn btn-success btn-lg" lang role="button">Client</a> <a href="Consultants.php" class="btn btn-primary btn-lg" lang role="button">Consultants</a></p>
+                    <p class="text-center"><a href="Consultants.php"><img src="assets/Consultant.PNG" class="rounded" style="max-width:40%;"></a>  <a href="Client.php"><img src="assets/Clinet.PNG" class="rounded" style="max-width: 40%;"></a></p>
+                    <p>&nbsp;</p>
                 </div>
             </div>
         </div>
